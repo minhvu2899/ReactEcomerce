@@ -1,0 +1,43 @@
+.timeline {
+  position: relative;
+}
+.content {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: nowrap;
+  color: rgba(0, 0, 0, 0.54);
+  font-size: 14px;
+  line-height: 32px;
+}
+.dot {
+  width: 11px;
+  height: 11px;
+  margin: 11px 8px 0 0;
+  flex-shrink: 0;
+  z-index: 1;
+  border-radius: 50%;
+  background: #d8d8d8;
+}
+.date {
+  width: 130px;
+  margin: 0 4px 0 0;
+  flex-shrink: 0;
+}
+
+.gach {
+  width: 1px;
+  height: 100%;
+  position: absolute;
+  top: 12px;
+  left: 5px;
+  background: #7a7474;
+}
+.wrap > div:last-child > .gach {
+  display: none;
+}
+.wrap > div:first-child .content .dot {
+  background: #26aa99;
+}
+.wrap > div:first-child .content .note {
+  color: #26aa99;
+}

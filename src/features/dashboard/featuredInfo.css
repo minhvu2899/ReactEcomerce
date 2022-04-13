@@ -1,0 +1,73 @@
+.featured {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.featuredItem {
+  flex: 1;
+  margin: 0px 20px;
+  padding: 30px;
+  border-radius: 10px;
+  cursor: pointer;
+  -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+  box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+}
+.featuredItem.income {
+  background-color: #c8facd;
+  color: #005249;
+}
+.featuredItem.profit {
+  color: #b72136;
+
+  background-color: #ffe7d9;
+}
+.featuredItem.cost {
+  background-color: #ffe68f;
+  color: #7a4f01;
+}
+
+.featuredTitle {
+  font-size: 20px;
+  font-weight: bold;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.featuredMoneyContainer {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+}
+
+.featuredMoney {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.featuredMoneyRate {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.featuredIcon {
+  font-size: 14px;
+  margin-left: 5px;
+  color: green;
+}
+
+.featuredIcon.negative {
+  color: red;
+}
+
+.featuredSub {
+  font-size: 15px;
+  color: gray;
+}
+.chart {
+  margin: 0;
+  padding: 0;
+}
