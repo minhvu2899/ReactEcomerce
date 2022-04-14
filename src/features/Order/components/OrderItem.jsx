@@ -39,13 +39,13 @@ function OrderItem({ item }) {
 
     return (
         <>
-            <Grid container item>
+            <Grid container item alignItems="center">
                 <Grid item md={4}>
                     <Box sx={{ display: 'flex', alignItems: 'center' }}>
                         <Avatar
                             alt={item.name}
                             src={thumbnailUrl}
-                            sx={{ width: 60, height: 60, }}
+                            sx={{ width: 60, height: 60, p: 1 }}
                             variant="rounded"
                         />
 

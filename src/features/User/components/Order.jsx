@@ -1,14 +1,10 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Box, Paper, Divider, Grid, Typography, Button, Dialog, IconButton, DialogTitle, DialogContent, TextField } from '@mui/material';
+import { Box, Button, Divider, Grid, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import ButtonCustom from 'components/ButtonCustom';
 import OrderItem from 'features/Order/components/OrderItem';
-import { formatPrice } from 'utils';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Close } from '@mui/icons-material';
-import { useState } from 'react';
-import ModalViewRating from './ModalViewRating';
-import ModalCancelOrder from './ModalCancelOrder';
-import { makeStyles } from '@mui/styles'
+import { formatPrice } from 'utils';
 
 function checkRating(comments, order_items) {
     const newOrder_items = order_items.map(o => {
@@ -61,8 +57,7 @@ function Order(props) {
 
     }
 
-    // order_items = checkRating(comments, order_items)
-    // console.log(order_items)
+
     return (
         <Box padding={1} marginBottom={1} >
 
@@ -116,11 +111,10 @@ function Order(props) {
 
             </Box>)}
             {item.orderStatus === 'NEW' && (<Box padding={1} align="right">
-                <Button variant="contained" color="primary" style={{ marginRight: '8px' }} onClick={() => handelCancelClick(item._id)}>Hủy đơn hàng</Button>
+                <ButtonCustom variant="contained" color="primary" style={{ marginRight: '8px' }} onClick={() => handelCancelClick(item._id)}>Hủy đơn hàng</ButtonCustom>
 
             </Box>)}
-            {/* <ModalViewRating open={open} setOpen={setOpen} comment={comment} /> */}
-            {/* <ModalCancelOrder open={openCancel} setOpenCancel={setOpenCancel} handleCancelClick={() => handelCancelOrderClick(true)} id={item._id} /> */}
+
         </Box >
 
     );

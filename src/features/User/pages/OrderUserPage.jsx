@@ -83,6 +83,10 @@ const OrderUserPage = () => {
         if (statusUpdateStatus === 'completed' && !errorUpdateOrderStatus) {
 
             toast.success("Đơn hàng đã hủy thành công")
+            setFilters(pre => ({
+                ...pre,
+                orderStatus: "CANCEL"
+            }));
 
         }
         if (statusUpdateStatus === 'completed' && errorUpdateOrderStatus) {
