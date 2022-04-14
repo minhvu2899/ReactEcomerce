@@ -8,30 +8,30 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
+import StorageKeys from 'constants/storage-keys';
 const PasswordChangePage = () => {
     const navigate = useNavigate()
-    const { updateMyPassword } = userApi;
-    const { sendRequest: updatePassword, status, data: user, error } = useHttp(updateMyPassword, false);
+    const [loading, setLoading] = useState(false)
     const { isLogin } = useSelector(state => state.user);
-    useEffect(() => {
+    const handleSubmit = async (values) => {
 
-        if (status === 'completed' && !error) {
+        try {
+            setLoading(true)
+            const { data } = await userApi.updateMyPassword(values)
+            console.log(data.token)
+            localStorage.setItem(StorageKeys.TOKEN, data.token);
             toast.success('Cập nhật thành công')
-
         }
-        if (status === 'completed' && error) {
-            toast.error(error)
+        catch (err) {
+            toast.error(err)
         }
-    }, [status, error])
-    const handleSubmit = (values) => {
-
-
-        updatePassword({ ...values })
+        setLoading(false)
     }
     return (
         <Paper>
             <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-                {status === 'pending' && (<LoadingLinear />)}
+                {loading && (<LoadingLinear />)}
                 <FormPasswordChange onSubmit={handleSubmit} />
 
 
