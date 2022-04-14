@@ -3,11 +3,10 @@ import { Box, Button, Container, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import CheckBoxField from 'components/CheckBox';
 import { FormInputDropdown } from 'components/SelectField';
-import RichText from 'features/dashboard/components/RichText';
 import React from 'react';
 import InputField from './../../../../components/InputField/index';
-import RichEditer from './RichEditer';
 import FormProductInfoDeliver from './FormProductInfoDeliver';
+import RichEditer from './RichEditer';
 const useStyles = makeStyles((theme) => ({
     formControl: {
         marginBottom: theme.spacing(2),
@@ -132,27 +131,7 @@ const FormProductInformation = ({ form, categories, subcategories, onCategoryCha
 
 
 
-                {/* <Box padding={1}>
-                    <Grid container spacing={2}> */}
 
-
-                {/* <Box paddingBottom={1}>
-                            <Typography variant="h6" align="left">Mô tả chi tiết sản phẩm:</Typography> */}
-
-                {/* <TextEditer {...form.register('full_description')} form={form} name='full_description'></TextEditer> */}
-                {/* <RichText control={form.control} name="full_description" /> */}
-
-                {/* </Box> */}
-                {/* <FormProductVariants form={form} /> */}
-                {/* <input type='hidden' {...form.register('image')} name='image'></input>
-                        <input type='hidden' {...form.register('images')} name='images'></input> */}
-
-
-
-
-                {/* 
-                    </Grid>
-                </Box> */}
             </Container >
         </Paper >
 
