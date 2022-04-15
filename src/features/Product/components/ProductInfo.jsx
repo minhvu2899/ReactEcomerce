@@ -1,18 +1,17 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import AddToCartForm from './AddToCartForm';
-import { formatPrice } from 'utils';
 import Divider from '@mui/material/Divider';
-import Stack from '@mui/material/Stack';
 import Rating from '@mui/material/Rating';
-import ProductDescription from './ProductDescription';
-export default function ProductInfo({ onSubmit, product }) {
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+import LoadingLinear from 'components/LoadingLinear';
+import * as React from 'react';
+import { formatPrice } from 'utils';
+import AddToCartForm from './AddToCartForm';
+export default function ProductInfo({ onSubmit, product, loading }) {
     return (
         <Card variant="outlined" sx={{ height: '100%', minWidth: 275 }} >
             <CardContent sx={{ textAlign: 'left' }}>
@@ -49,6 +48,7 @@ export default function ProductInfo({ onSubmit, product }) {
             <CardActions>
                 <Button size="small">Yêu thích</Button>
             </CardActions>
+            {loading && (<LoadingLinear />)}
         </ Card>
 
 

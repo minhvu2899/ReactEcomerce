@@ -14,13 +14,16 @@ import { register } from '../userSlice'
 import { toast } from "react-toastify";
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 const theme = createTheme();
 
 export default function RegisterPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
     const handleSubmit = async (values) => {
         try {
+            setLoading(true)
             const { email, password, name, passwordConfirm } = values;
             const resultAction = await dispatch(register({ email, password, name, passwordConfirm }));
 
@@ -37,6 +40,7 @@ export default function RegisterPage() {
             const message = error.message;
             toast.error(message)
         }
+        setLoading(false)
     }
 
     return (
@@ -73,7 +77,7 @@ export default function RegisterPage() {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <SignupForm onSubmit={handleSubmit} />
+                        <SignupForm onSubmit={handleSubmit} loading={loading} />
                     </Box>
                 </Grid>
             </Grid>

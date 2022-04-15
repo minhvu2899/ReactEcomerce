@@ -1,21 +1,20 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
+import ButtonCustom from 'components/ButtonCustom';
+import LoadingLinear from 'components/LoadingLinear';
+import PasswordField from 'components/PasswordField';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import * as yup from "yup";
-import InputField from '../../../components/InputField';
-import PasswordField from 'components/PasswordField';
 import {
     Link, useNavigate
 } from "react-router-dom";
-function LoginForm({ onSubmit }) {
+import * as yup from "yup";
+import InputField from '../../../components/InputField';
+function LoginForm({ onSubmit, loading }) {
     const navigate = useNavigate();
     const schema = yup.object().shape({
 
@@ -50,6 +49,7 @@ function LoginForm({ onSubmit }) {
     }
     return (
         <>
+
             <form onSubmit={form.handleSubmit(handleSubmit)} sx={{ mt: 1 }}>
                 <Box sx={{ mb: 3 }}>
                     <InputField form={form} name="email" label="Email" />
@@ -60,14 +60,14 @@ function LoginForm({ onSubmit }) {
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                 />
-                <Button
+                <ButtonCustom
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
                     Đăng nhập
-                </Button>
+                </ButtonCustom>
                 <Grid container>
                     <Grid item xs>
                         <Link to="/auth/forgot-password">
@@ -76,14 +76,14 @@ function LoginForm({ onSubmit }) {
                     </Grid>
                     <Grid item>
 
-                        <Button color="primary" onClick={handelClickSignup}>
+                        <ButtonCustom color="primary" onClick={handelClickSignup}>
 
                             Chưa có tài khoản? Đăng kí ngay
 
-                        </Button>
+                        </ButtonCustom>
                     </Grid>
                 </Grid>
-
+                {loading && <LoadingLinear />}
             </form>
         </>
     );

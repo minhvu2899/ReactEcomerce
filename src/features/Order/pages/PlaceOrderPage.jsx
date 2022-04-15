@@ -1,34 +1,25 @@
-import { Box, Button, Container, Divider, FormControlLabel, Paper, Radio, RadioGroup, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Box, Container, Divider, FormControlLabel, Paper, Radio, RadioGroup, Typography } from '@mui/material';
+import { unwrapResult } from '@reduxjs/toolkit';
 import addressApi from 'api/addressApi';
 import ButtonCustom from 'components/ButtonCustom';
 import ModalCustom from 'components/ModalCustom';
-import { addShippingAddress, resetCart } from 'features/Cart/cartSlice';
+import { resetCart } from 'features/Cart/cartSlice';
+import { reset } from 'features/Order/orderSlice';
+import { cartItemsTotalSelector } from 'features/Cart/selectors';
 import FormAddress from 'features/User/components/FormAddress';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+import { formatPrice } from 'utils';
+import useHttp from '../../../hooks/use-http';
 import CheckoutStep from '../components/CheckoutStep';
 import ListItem from '../components/ListItem';
-import ShippingAddress from '../components/ShippingAddress';
-import useHttp from '../../../hooks/use-http';
 import Payment from '../components/Payment';
-import { formatPrice } from 'utils';
-import { cartItemsTotalSelector } from 'features/Cart/selectors';
+import ShippingAddress from '../components/ShippingAddress';
 import { createOrder } from '../orderSlice';
-import { unwrapResult } from '@reduxjs/toolkit';
-import { toast } from 'react-toastify'
-const useStyles = makeStyles(theme => (
-    {
-        label: {
-            width: '100%'
-        },
-        'MuiTypography-body1': {
-            width: '100%'
-        }
-    }
-))
-function ShippingPage(props) {
+
+function PlaceOrderPage(props) {
     const [open, setOpen] = useState(true);
     const [isChangeAddress, setIsChangeAddress] = useState(false);
     const [paymentMethod, setPaymentMethod] = React.useState('Thanh toán khi nhận hàng');
@@ -132,8 +123,8 @@ function ShippingPage(props) {
             toast.success(
                 'Đặt hàng thành công'
             )
-
-            dispatch(resetCart());
+            await dispatch(resetCart());
+            await dispatch(reset())
 
 
             // console.log("Fetch:", user);
@@ -145,10 +136,7 @@ function ShippingPage(props) {
         }
 
     }
-    const handelOnClick = () => {
-        const address = addresses.find(address => address.id === shippingAddress._id);
-        dispatch(addShippingAddress(address))
-    }
+
     const handelCloseModal = () => {
         navigate({ pathname: '/cart' })
         setOpen(false)
@@ -161,7 +149,7 @@ function ShippingPage(props) {
     return (
         <Container>
             <Paper elevation={1}>
-                {/* <CheckoutSteps step1 step2></CheckoutSteps> */}
+
                 <Box sx={{ width: '100%' }}>
                     <CheckoutStep step={isChangeAddress ? 1 : 2} />
                     <Box sx={{ textAlign: 'left', p: 1 }}>
@@ -271,4 +259,4 @@ function ShippingPage(props) {
     );
 }
 
-export default ShippingPage;
+export default PlaceOrderPage;

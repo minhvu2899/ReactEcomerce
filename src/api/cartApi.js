@@ -1,8 +1,8 @@
-import axiosClient from './axiosClient';
+import axiosClient from "./axiosClient";
 
 const cartApi = {
   getAll(params) {
-    const url = '/carts';
+    const url = "/carts";
     return axiosClient.get(url, { params });
   },
   get(id) {
@@ -10,7 +10,7 @@ const cartApi = {
     return axiosClient.get(url);
   },
   add(data) {
-    const url = '/carts';
+    const url = "/carts";
     return axiosClient.post(url, data);
   },
   update(data) {
@@ -19,6 +19,10 @@ const cartApi = {
   },
   remove(id) {
     const url = `/carts/${id}`;
+    return axiosClient.delete(url);
+  },
+  reset() {
+    const url = `/carts`;
     return axiosClient.delete(url);
   },
 };

@@ -14,15 +14,17 @@ import { login } from '../userSlice'
 import { toast } from "react-toastify";
 import { unwrapResult } from '@reduxjs/toolkit';
 import { useNavigate } from 'react-router-dom'
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 const theme = createTheme();
 
 export default function LoginPage() {
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    const [loading, setLoading] = useState(false)
     const { isLogin } = useSelector(state => state.user)
     const handleSubmit = async ({ email, password }) => {
         try {
+            setLoading(true)
             const data = { email, password };
             const resultAction = await dispatch(login(data));
 
@@ -42,6 +44,7 @@ export default function LoginPage() {
             const message = error.message;
             toast.error(message)
         }
+        setLoading(false)
     }
     useEffect(() => {
         if (isLogin) {
@@ -82,7 +85,7 @@ export default function LoginPage() {
                         <Typography component="h1" variant="h5">
                             Sign in
                         </Typography>
-                        <LoginForm onSubmit={handleSubmit} />
+                        <LoginForm onSubmit={handleSubmit} loading={loading} />
                     </Box>
                 </Grid>
             </Grid>

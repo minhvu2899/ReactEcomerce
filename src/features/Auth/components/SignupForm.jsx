@@ -12,17 +12,19 @@ import { useForm } from 'react-hook-form';
 import * as yup from "yup";
 import InputField from '../../../components/InputField';
 import PasswordField from 'components/PasswordField';
+import ButtonCustom from 'components/ButtonCustom';
 import {
     Link, useNavigate
 } from "react-router-dom";
-function SignupForm({ onSubmit }) {
+import LoadingLinear from 'components/LoadingLinear';
+function SignupForm({ onSubmit, loading }) {
     const navigate = useNavigate();
     const schema = yup.object().shape({
 
-        name: yup.string().required('Please enter your first_name'),
-        email: yup.string().required('Please enter your email').email('Please enter a valid email address'),
-        password: yup.string().required('Please enter your password').min(6, 'Please enter at least 6 words'),
-        passwordConfirm: yup.string().required('Please enter retype password.').oneOf([yup.ref('password')], 'Password does not match!')
+        name: yup.string().required('Vui lòng nhập tên'),
+        email: yup.string().required('Vui lòng nhập email').email('Vui lòng nhập email hợp lệ'),
+        password: yup.string().required('Vui lòng nhập mật khẩu').min(6, 'Vui lòng nhập ít nhất 6 kí tự'),
+        passwordConfirm: yup.string().required('Vui lòng nhập lại mật khẩu').oneOf([yup.ref('password')], 'Không khớp!')
 
 
 
@@ -53,6 +55,7 @@ function SignupForm({ onSubmit }) {
     }
     return (
         <>
+
             <form onSubmit={form.handleSubmit(handleSubmit)} sx={{ mt: 1 }} >
                 <Box sx={{ mb: 3 }}>
                     <InputField form={form} name="name" label="Họ và tên" />
@@ -70,14 +73,14 @@ function SignupForm({ onSubmit }) {
                     control={<Checkbox value="remember" color="primary" />}
                     label="Remember me"
                 />
-                <Button
+                <ButtonCustom
                     type="submit"
                     fullWidth
                     variant="contained"
                     sx={{ mt: 3, mb: 2 }}
                 >
-                    Đăng nhập
-                </Button>
+                    Đăng kí
+                </ButtonCustom>
                 <Grid container>
                     <Grid item xs>
                         <Link to="auth/forgot">
@@ -86,14 +89,14 @@ function SignupForm({ onSubmit }) {
                     </Grid>
                     <Grid item>
 
-                        <Button color="primary" onClick={handelClickSignin}>
+                        <ButtonCustom color="primary" onClick={handelClickSignin}>
 
                             Đã có tài khoản? Đăng nhập ngay
 
-                        </Button>
+                        </ButtonCustom>
                     </Grid>
                 </Grid>
-
+                {loading && <LoadingLinear />}
             </form>
         </>
     );

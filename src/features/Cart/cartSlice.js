@@ -22,6 +22,11 @@ export const removeFromCart = createAsyncThunk(
     return payload;
   }
 );
+export const resetCart = createAsyncThunk("cart/resetCart", async (payload) => {
+  await cartApi.reset();
+
+  return payload;
+});
 export const updateCartItems = createAsyncThunk(
   "cart/updateCartItems",
   async (payload) => {
@@ -39,9 +44,6 @@ const cartSlice = createSlice({
   },
 
   reducers: {
-    resetCart(state) {
-      state.cartItems = [];
-    },
     showMiniCart(state) {
       state.showMiniCart = true;
     },
@@ -71,6 +73,10 @@ const cartSlice = createSlice({
       state.cartItems = newItems.filter((x) => x._id !== action.payload);
 
       sessionStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+    },
+    [removeFromCart.fulfilled]: (state, action) => {
+      state.cartItems = [];
+      sessionStorage.setItem("cartItems", []);
     },
     [getCartItems.fulfilled]: (state, action) => {
       // Add user to the state array
@@ -114,6 +120,5 @@ export const {
   // addToCart,
   // removeFromCart,
   setQuantity,
-  resetCart,
 } = actions; //named export
 export default reducer; //default export

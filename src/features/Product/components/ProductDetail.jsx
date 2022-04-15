@@ -5,7 +5,8 @@ import Grid from '@mui/material/Grid';
 import ProductInfo from './ProductInfo';
 import ProductCarousel from './ProductCarousel';
 
-export const ProductDetail = ({ onSubmit, product }) => {
+
+export const ProductDetail = ({ onSubmit, product, loading }) => {
 
     const handelSubmitAddToCart = (values) => {
 
@@ -19,7 +20,7 @@ export const ProductDetail = ({ onSubmit, product }) => {
                     <ProductCarousel image={product.imageCover} images={product.images} />
                 </Grid>
                 <Grid item xs={12} sm={5} sx={{ p: { md: 3, xs: 0 } }}>
-                    <ProductInfo onSubmit={handelSubmitAddToCart} product={product} />
+                    <ProductInfo onSubmit={handelSubmitAddToCart} product={product} loading={loading} />
                 </Grid>
 
             </Grid>
